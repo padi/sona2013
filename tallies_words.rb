@@ -1,17 +1,18 @@
 class TalliesWords
   def self.execute text
-    tally = {}
+    result = []
     text = cleanup text
 
     text.split.each do |word|
-      unless tally[word]
-        tally.merge!({word => 1})
+      index = result.find_index {|e| e[word]}
+      unless index
+        result << {word => 1}
       else
-        tally[word] += 1
+        result[index][word] += 1
       end
     end
 
-    tally
+    result.sort {|a, b| b.values.first <=> a.values.first}
   end
 
   private
