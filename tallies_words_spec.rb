@@ -7,6 +7,8 @@ describe TalliesWords do
         to eq({"word" => 1, "tally" => 1})
       expect(described_class.execute("something else")).
         to eq({"something" => 1, "else" => 1})
+      expect(described_class.execute("word word word tally tally")).
+        to eq({"word" => 3, "tally" => 2})
     end
 
     it "should NOT be case sensitive" do

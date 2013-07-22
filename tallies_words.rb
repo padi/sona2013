@@ -1,9 +1,22 @@
 class TalliesWords
   def self.execute text
-    result = {}
-    text.downcase.gsub(/[^a-z\s%-]/,'').split.each do |word|
-      result.merge!({word => 1})
+    tally = {}
+    text = cleanup text
+
+    text.split.each do |word|
+      unless tally[word]
+        tally.merge!({word => 1})
+      else
+        tally[word] += 1
+      end
     end
-    result
+
+    tally
+  end
+
+  private
+
+  def self.cleanup text
+    text.downcase.gsub(/[^a-z\s%-]/,'')
   end
 end
